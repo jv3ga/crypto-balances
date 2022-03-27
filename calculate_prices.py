@@ -1,5 +1,7 @@
 import requests
 
+# ToDo: utilizar otra api para buscar precios, no están todos las moneadas
+
 def calular_precio_btc(asset, cantidad):
     url = 'https://data.messari.io/api/v1/assets/{}/metrics'.format(asset)
     data = requests.request('GET', url)
