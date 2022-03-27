@@ -1,4 +1,5 @@
 from secretito import BINANCE_API as API_KEY, BINANCE_SECRET as API_SECRET
+from calculate_prices import calular_precio_btc, calular_precio_usd
 from binance import Client
 
 
@@ -22,10 +23,11 @@ def print_binance_balance ():
     for asset in balance:
         if float(asset['free']) != 0 or float(asset['locked']) != 0:
             moneda = asset['asset']
-            cantidad  = asset['free']
-            price = 0
-            print('Moneda:{}: - Cantidad: {} - Precio: {}'.format(
-                moneda, cantidad, price
+            cantidad  = float(asset['free'])
+            total_usd = calular_precio_usd(moneda, cantidad)
+            total_btc = calular_precio_btc(moneda, cantidad)
+            print('Moneda:{}: - Cantidad: {} - Precio: {} BTC - {} USD'.format(
+                moneda, cantidad, total_btc, total_usd
                 )
             )
 
